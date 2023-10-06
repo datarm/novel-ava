@@ -4,7 +4,7 @@
 </a>
 
 <p align="center">
-  An open-source Notion-style WYSIWYG editor with AI-powered autocompletions. 
+  An open-source Notion-style WYSIWYG editor with AI-powered autocompletions. Attempting to add AI to bubble menu.
 </p>
 
 <p align="center">
