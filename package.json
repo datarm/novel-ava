@@ -67,7 +67,7 @@
     "turbo": "^1.9.3"
   },
     "exports": {
-    ".": "./src/index.ts",
-    "./Editor": "./src/ui/editor.ts" 
+    ".": "./packages/core/src/index.ts",
+    "./Editor": "./apps/web/ui/editor.ts" 
   }
 }
