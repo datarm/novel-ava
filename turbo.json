@@ -10,7 +10,8 @@
     "check-types": {},
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["NEXT_PUBLIC_OPENAI_API_KEY"]
     },
     "clean": {
       "cache": false

@@ -9,7 +9,7 @@ export interface BubbleColorMenuItem {
 }
 
 interface ColorSelectorProps {
-  editor: Editor;
+  editor: Editor | undefined;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -98,11 +98,11 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
   setIsOpen,
 }) => {
   const activeColorItem = TEXT_COLORS.find(({ color }) =>
-    editor.isActive("textStyle", { color })
+    editor!.isActive("textStyle", { color })
   );
 
   const activeHighlightItem = HIGHLIGHT_COLORS.find(({ color }) =>
-    editor.isActive("highlight", { color })
+    editor!.isActive("highlight", { color })
   );
 
   return (
@@ -136,9 +136,9 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
             <button
               key={index}
               onClick={() => {
-                editor.commands.unsetColor();
+                editor!.commands.unsetColor();
                 name !== "Default" &&
-                  editor
+                  editor!
                     .chain()
                     .focus()
                     .setColor(color || "")
@@ -157,7 +157,7 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
                 </div>
                 <span>{name}</span>
               </div>
-              {editor.isActive("textStyle", { color }) && (
+              {editor!.isActive("textStyle", { color }) && (
                 <Check className="novel-h-4 novel-w-4" />
               )}
             </button>
@@ -171,8 +171,8 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
             <button
               key={index}
               onClick={() => {
-                editor.commands.unsetHighlight();
-                name !== "Default" && editor.commands.setHighlight({ color });
+                editor!.commands.unsetHighlight();
+                name !== "Default" && editor!.commands.setHighlight({ color });
                 setIsOpen(false);
               }}
               className="novel-flex novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-stone-600 hover:novel-bg-stone-100"
@@ -187,7 +187,7 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
                 </div>
                 <span>{name}</span>
               </div>
-              {editor.isActive("highlight", { color }) && (
+              {editor!.isActive("highlight", { color }) && (
                 <Check className="novel-h-4 novel-w-4" />
               )}
             </button>

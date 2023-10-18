@@ -7,6 +7,7 @@ import {
   StrikethroughIcon,
   CodeIcon,
 } from "lucide-react";
+import { AISelector } from "./ai-selector";
 import { NodeSelector } from "./node-selector";
 import { ColorSelector } from "./color-selector";
 import { LinkSelector } from "./link-selector";
@@ -25,32 +26,32 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
   const items: BubbleMenuItem[] = [
     {
       name: "bold",
-      isActive: () => props.editor.isActive("bold"),
-      command: () => props.editor.chain().focus().toggleBold().run(),
+      isActive: () => props.editor!.isActive("bold"),
+      command: () => props.editor!.chain().focus().toggleBold().run(),
       icon: BoldIcon,
     },
     {
       name: "italic",
-      isActive: () => props.editor.isActive("italic"),
-      command: () => props.editor.chain().focus().toggleItalic().run(),
+      isActive: () => props.editor!.isActive("italic"),
+      command: () => props.editor!.chain().focus().toggleItalic().run(),
       icon: ItalicIcon,
     },
     {
       name: "underline",
-      isActive: () => props.editor.isActive("underline"),
-      command: () => props.editor.chain().focus().toggleUnderline().run(),
+      isActive: () => props.editor!.isActive("underline"),
+      command: () => props.editor!.chain().focus().toggleUnderline().run(),
       icon: UnderlineIcon,
     },
     {
       name: "strike",
-      isActive: () => props.editor.isActive("strike"),
-      command: () => props.editor.chain().focus().toggleStrike().run(),
+      isActive: () => props.editor!.isActive("strike"),
+      command: () => props.editor!.chain().focus().toggleStrike().run(),
       icon: StrikethroughIcon,
     },
     {
       name: "code",
-      isActive: () => props.editor.isActive("code"),
-      command: () => props.editor.chain().focus().toggleCode().run(),
+      isActive: () => props.editor!.isActive("code"),
+      command: () => props.editor!.chain().focus().toggleCode().run(),
       icon: CodeIcon,
     },
   ];
@@ -74,12 +75,14 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
       moveTransition: "transform 0.15s ease-out",
       onHidden: () => {
         setIsNodeSelectorOpen(false);
+        setIsAISelectorOpen(false);
         setIsColorSelectorOpen(false);
         setIsLinkSelectorOpen(false);
       },
     },
   };
 
+  const [isAISelectorOpen, setIsAISelectorOpen] = useState(false);
   const [isNodeSelectorOpen, setIsNodeSelectorOpen] = useState(false);
   const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false);
   const [isLinkSelectorOpen, setIsLinkSelectorOpen] = useState(false);
@@ -89,6 +92,16 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
       {...bubbleMenuProps}
       className="novel-flex novel-w-fit novel-divide-x novel-divide-stone-200 novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl"
     >
+      <AISelector
+        editor={props.editor}
+        isOpen={isAISelectorOpen}
+        setIsOpen={() => {
+          setIsAISelectorOpen(!isAISelectorOpen);
+          setIsNodeSelectorOpen(false);
+          setIsColorSelectorOpen(false);
+          setIsLinkSelectorOpen(false);
+        }}
+      />
       <NodeSelector
         editor={props.editor}
         isOpen={isNodeSelectorOpen}
@@ -96,6 +109,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
           setIsNodeSelectorOpen(!isNodeSelectorOpen);
           setIsColorSelectorOpen(false);
           setIsLinkSelectorOpen(false);
+          setIsAISelectorOpen(false);
         }}
       />
       <LinkSelector
@@ -105,6 +119,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
           setIsLinkSelectorOpen(!isLinkSelectorOpen);
           setIsColorSelectorOpen(false);
           setIsNodeSelectorOpen(false);
+          setIsAISelectorOpen(false);
         }}
       />
       <div className="novel-flex">
@@ -130,6 +145,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
           setIsColorSelectorOpen(!isColorSelectorOpen);
           setIsNodeSelectorOpen(false);
           setIsLinkSelectorOpen(false);
+          setIsAISelectorOpen(false);
         }}
       />
     </BubbleMenu>

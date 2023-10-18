@@ -4,7 +4,7 @@ import { Check, Trash } from "lucide-react";
 import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
 
 interface LinkSelectorProps {
-  editor: Editor;
+  editor: Editor | undefined;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -35,7 +35,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
           className={cn(
             "novel-underline novel-decoration-stone-400 novel-underline-offset-4",
             {
-              "novel-text-blue-500": editor.isActive("link"),
+              "novel-text-blue-500": editor!.isActive("link"),
             }
           )}
         >
@@ -48,7 +48,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
             e.preventDefault();
             const input = e.currentTarget[0] as HTMLInputElement;
             const url = getUrlFromString(input.value);
-            url && editor.chain().focus().setLink({ href: url }).run();
+            url && editor!.chain().focus().setLink({ href: url }).run();
             setIsOpen(false);
           }}
           className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-flex novel-w-60 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-1 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1"
@@ -58,14 +58,14 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
             type="text"
             placeholder="Paste a link"
             className="novel-flex-1 novel-bg-white novel-p-1 novel-text-sm novel-outline-none"
-            defaultValue={editor.getAttributes("link").href || ""}
+            defaultValue={editor!.getAttributes("link").href || ""}
           />
-          {editor.getAttributes("link").href ? (
+          {editor!.getAttributes("link").href ? (
             <button
               type="button"
               className="novel-flex novel-items-center novel-rounded-sm novel-p-1 novel-text-red-600 novel-transition-all hover:novel-bg-red-100 dark:hover:novel-bg-red-800"
               onClick={() => {
-                editor.chain().focus().unsetLink().run();
+                editor!.chain().focus().unsetLink().run();
                 setIsOpen(false);
               }}
             >

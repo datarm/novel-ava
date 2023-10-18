@@ -213,7 +213,13 @@ export default function Editor({
         }}
         className={className}
       >
-        {editor && <EditorBubbleMenu editor={editor} />}
+        {editor && (
+          <>
+            <EditorBubbleMenu editor={editor} />
+            {/* TODO: Populate AIBubbleMenu with return from EditorBubbleMenu AI calls */}
+            {/* <AIBubbleMenu editor={editor} completion={bubbleMenuCompletion} /> */}
+          </>
+        )}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
       </div>
