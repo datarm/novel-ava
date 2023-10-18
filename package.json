@@ -1,6 +1,6 @@
 {
   "name": "novel-ava",
-  "private": true,
+  "private": false,
   "scripts": {
     "build": "turbo build",
     "dev": "dotenv -- turbo dev",
