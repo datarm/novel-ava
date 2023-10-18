@@ -53,7 +53,7 @@ const aiOptions = [
     isLoading: false,
   },
   {
-    name: "Translate to Chinese",
+    name: "Translate to Mandarin",
     icon: Globe2,
     prompt: `${metaPrompt} Translate this text to Chinese:\n\n`,
     isLoading: false,
