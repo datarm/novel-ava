@@ -1,5 +1,4 @@
 import {
-  CheckCheck,
   Wand2,
   Mail,
   Globe2,
@@ -22,7 +21,7 @@ const aiOptions = [
   {
     name: "Continue Writing",
     icon: PenTool,
-    prompt: `${metaPrompt} Please continue writing this text. Your goal is to write a paragraph that is consistent with the style and tone of the provided text. Provide at least 3-5 sentences if possible without repeating yourself.:\n\n`,
+    prompt: `${metaPrompt} Please continue writing this text. Your goal is to write a paragraph that is consistent with the style and tone of the provided text. Provide this same text without any changes followed by at least 3-5 sentences if possible without repeating yourself.:\n\n`,
     isLoadomg: false,
   },
   {
